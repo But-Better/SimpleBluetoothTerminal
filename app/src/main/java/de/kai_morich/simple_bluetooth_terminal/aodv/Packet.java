@@ -1,5 +1,10 @@
 package de.kai_morich.simple_bluetooth_terminal.aodv;
 
+import android.os.Build;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+
 import java.util.Base64;
 
 public abstract class Packet {
@@ -9,12 +14,14 @@ public abstract class Packet {
     private int hopAddress;
     private int prevHopAddress;
 
-    public Base64 ToBase64(Object o){
-        return null;
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public byte[] ToBase64(@NonNull String text) {
+        return Base64.getDecoder().decode(text);
     }
 
-    public String ToPlainText(Base64 base64){
-        return null;
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public String ToPlainText(@NonNull byte[] base64) {
+        return Base64.getEncoder().encodeToString(base64);
     }
 
     //public abstract void addPath(Packet packet);
