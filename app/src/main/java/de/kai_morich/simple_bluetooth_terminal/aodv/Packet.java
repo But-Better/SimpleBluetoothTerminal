@@ -11,7 +11,7 @@ public abstract class Packet {
 
     public abstract String ToPlainText(Base64 base64);
 
-    public abstract void addPath(Packet packet);
+    //public abstract void addPath(Packet packet);
 
     public int getHopAddress() {
         return hopAddress;
