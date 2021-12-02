@@ -4,6 +4,8 @@ import java.util.Base64;
 
 public abstract class Packet {
 
+    private int messageType;
+    private int flags;
     private int hopAddress;
     private int prevHopAddress;
 
@@ -21,6 +23,14 @@ public abstract class Packet {
         return hopAddress;
     }
 
+    public int getMessageType() {
+        return messageType;
+    }
+
+    public int getFlags() {
+        return flags;
+    }
+
     public void setHopAddress(int hopAddress) {
         this.hopAddress = hopAddress;
     }
@@ -31,5 +41,13 @@ public abstract class Packet {
 
     public void setPrevHopAddress(int prevHopAddress) {
         this.prevHopAddress = prevHopAddress;
+    }
+
+    public void setMessageType(int messageType) {
+        this.messageType = messageType;
+    }
+
+    public void setFlags(int flags) {
+        this.flags = flags;
     }
 }
