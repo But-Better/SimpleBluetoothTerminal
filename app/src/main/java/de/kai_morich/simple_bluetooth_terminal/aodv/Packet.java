@@ -7,9 +7,13 @@ public abstract class Packet {
     private int hopAddress;
     private int prevHopAddress;
 
-    public abstract Base64 ToBase64(Object o);
+    public Base64 ToBase64(Object o){
+        return null;
+    }
 
-    public abstract String ToPlainText(Base64 base64);
+    public String ToPlainText(Base64 base64){
+        return null;
+    }
 
     //public abstract void addPath(Packet packet);
 
