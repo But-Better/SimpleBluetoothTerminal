@@ -1,7 +1,5 @@
 package de.kai_morich.simple_bluetooth_terminal.aodv;
 
-import java.util.Base64;
-
 public abstract class ReqRepBase extends Packet {
     private int requestId;
     private int destAddress;

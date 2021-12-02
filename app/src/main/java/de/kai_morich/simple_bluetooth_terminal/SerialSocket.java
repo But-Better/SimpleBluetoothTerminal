@@ -1,5 +1,6 @@
 package de.kai_morich.simple_bluetooth_terminal;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
@@ -14,6 +15,8 @@ import java.util.Arrays;
 import java.util.UUID;
 import java.util.concurrent.Executors;
 
+import de.kai_morich.simple_bluetooth_terminal.aodv.Handle.StreamDataHandle;
+
 class SerialSocket implements Runnable {
 
     private static final UUID BLUETOOTH_SPP = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
@@ -25,22 +28,25 @@ class SerialSocket implements Runnable {
     private final BluetoothDevice device;
     private BluetoothSocket socket;
     private boolean connected;
+    private final StreamDataHandle steamDataHandle;
 
     SerialSocket(Context context, BluetoothDevice device) {
-        if(context instanceof Activity)
+        if (context instanceof Activity)
             throw new InvalidParameterException("expected non UI context");
         this.context = context;
         this.device = device;
+        this.steamDataHandle = new StreamDataHandle();
         disconnectBroadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                if(listener != null)
+                if (listener != null)
                     listener.onSerialIoError(new IOException("background disconnect"));
                 disconnect(); // disconnect now, else would be queued until UI re-attached
             }
         };
     }
 
+    @SuppressLint("MissingPermission")
     String getName() {
         return device.getName() != null ? device.getName() : device.getAddress();
     }
@@ -57,7 +63,7 @@ class SerialSocket implements Runnable {
     void disconnect() {
         listener = null; // ignore remaining data and errors
         // connected = false; // run loop will reset connected
-        if(socket != null) {
+        if (socket != null) {
             try {
                 socket.close();
             } catch (Exception ignored) {
@@ -73,18 +79,20 @@ class SerialSocket implements Runnable {
     void write(byte[] data) throws IOException {
         if (!connected)
             throw new IOException("not connected");
+        this.steamDataHandle.readDataTraffic(data);
         socket.getOutputStream().write(data);
     }
 
+    @SuppressLint("MissingPermission")
     @Override
     public void run() { // connect & read
         try {
             socket = device.createRfcommSocketToServiceRecord(BLUETOOTH_SPP);
             socket.connect();
-            if(listener != null)
+            if (listener != null)
                 listener.onSerialConnect();
         } catch (Exception e) {
-            if(listener != null)
+            if (listener != null)
                 listener.onSerialConnectError(e);
             try {
                 socket.close();
@@ -101,7 +109,7 @@ class SerialSocket implements Runnable {
             while (true) {
                 len = socket.getInputStream().read(buffer);
                 byte[] data = Arrays.copyOf(buffer, len);
-                if(listener != null)
+                if (listener != null)
                     listener.onSerialRead(data);
             }
         } catch (Exception e) {
