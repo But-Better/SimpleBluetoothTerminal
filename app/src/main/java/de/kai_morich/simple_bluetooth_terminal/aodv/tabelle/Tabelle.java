@@ -1,4 +1,4 @@
-package de.kai_morich.simple_bluetooth_terminal.aodv;
+package de.kai_morich.simple_bluetooth_terminal.aodv.tabelle;
 
 import java.util.Objects;
 
@@ -7,7 +7,7 @@ public class Tabelle {
     private int destination;
     private int metrix;
 
-    public Tabelle(int destination, int metrix) {
+    Tabelle(int destination, int metrix) {
         this.destination = destination;
         this.metrix = metrix;
     }

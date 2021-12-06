@@ -1,11 +1,9 @@
-package de.kai_morich.simple_bluetooth_terminal.aodv;
-
-import androidx.annotation.NonNull;
+package de.kai_morich.simple_bluetooth_terminal.aodv.tabelle;
 
 import java.util.Arrays;
 import java.util.Objects;
 
-public class RoutingTabelle extends Tabelle{
+public class RoutingTabelle extends Tabelle {
 
     private int NextHop;
     private int[] precursors;
@@ -51,6 +49,8 @@ public class RoutingTabelle extends Tabelle{
     public void setValid(boolean valid) {
         isValid = valid;
     }
+
+
 
     @Override
     public boolean equals(Object o) {
