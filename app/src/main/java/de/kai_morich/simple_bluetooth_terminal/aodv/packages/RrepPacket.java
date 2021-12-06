@@ -1,8 +1,6 @@
-package de.kai_morich.simple_bluetooth_terminal.aodv;
+package de.kai_morich.simple_bluetooth_terminal.aodv.packages;
 
-import java.util.Base64;
-
-public class RrepPacket extends ReqRepBase{
+public class RrepPacket extends ReqRepBase {
     private int ttl;
 
     public int getTtl() {

@@ -1,8 +1,6 @@
-package de.kai_morich.simple_bluetooth_terminal.aodv;
+package de.kai_morich.simple_bluetooth_terminal.aodv.packages;
 
-import java.util.Base64;
-
-public class RerrPacket extends Packet{
+public class RerrPacket extends Packet {
     private int pathCount;
     private int[] destAdresses;
     private int[] destSequences;

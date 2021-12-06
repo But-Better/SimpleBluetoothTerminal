@@ -1,4 +1,4 @@
-package de.kai_morich.simple_bluetooth_terminal.aodv;
+package de.kai_morich.simple_bluetooth_terminal.aodv.packages;
 
 public abstract class Packet {
 

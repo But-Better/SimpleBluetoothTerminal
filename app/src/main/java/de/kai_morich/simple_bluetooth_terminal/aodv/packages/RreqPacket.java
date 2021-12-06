@@ -1,6 +1,6 @@
-package de.kai_morich.simple_bluetooth_terminal.aodv;
+package de.kai_morich.simple_bluetooth_terminal.aodv.packages;
 
-public class RreqPacket extends ReqRepBase{
+public class RreqPacket extends ReqRepBase {
     private int originSequence;
 
     public void setOriginSequence(int originSequence) {

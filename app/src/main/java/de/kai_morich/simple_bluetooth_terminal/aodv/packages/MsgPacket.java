@@ -1,8 +1,6 @@
-package de.kai_morich.simple_bluetooth_terminal.aodv;
+package de.kai_morich.simple_bluetooth_terminal.aodv.packages;
 
-import java.util.Base64;
-
-public class MsgPacket extends Packet{
+public class MsgPacket extends Packet {
     private int destAddress;
     private int originSequence;
     private int hopCount;
