@@ -5,64 +5,42 @@ import androidx.annotation.NonNull;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class RoutingTabelle {
+public class RoutingTabelle extends Tabelle{
 
-    private byte destination;
-    private byte NextHop;
-    private byte[] precursors;
-    private byte metric;
-    private byte sequenceNumber;
+    private int NextHop;
+    private int[] precursors;
+    private int sequenceNumber;
     private boolean isValid;
 
-    public RoutingTabelle() {
-    }
-
-    public RoutingTabelle(byte destination, byte nextHop, @NonNull byte[] precursors, byte metric, byte sequenceNumber, boolean isValid) {
-        this.destination = destination;
+    public RoutingTabelle(int destination, int metrix, int nextHop, int[] precursors, int sequenceNumber, boolean isValid) {
+        super(destination, metrix);
         NextHop = nextHop;
         this.precursors = precursors;
-        this.metric = metric;
         this.sequenceNumber = sequenceNumber;
         this.isValid = isValid;
     }
 
-    public byte getDestination() {
-        return destination;
-    }
-
-    public void setDestination(byte destination) {
-        this.destination = destination;
-    }
-
-    public byte getNextHop() {
+    public int getNextHop() {
         return NextHop;
     }
 
-    public void setNextHop(byte nextHop) {
+    public void setNextHop(int nextHop) {
         NextHop = nextHop;
     }
 
-    public byte[] getPrecursors() {
+    public int[] getPrecursors() {
         return precursors;
     }
 
-    public void setPrecursors(byte[] precursors) {
+    public void setPrecursors(int[] precursors) {
         this.precursors = precursors;
     }
 
-    public byte getMetric() {
-        return metric;
-    }
-
-    public void setMetric(byte metric) {
-        this.metric = metric;
-    }
-
-    public byte getSequenceNumber() {
+    public int getSequenceNumber() {
         return sequenceNumber;
     }
 
-    public void setSequenceNumber(byte sequenceNumber) {
+    public void setSequenceNumber(int sequenceNumber) {
         this.sequenceNumber = sequenceNumber;
     }
 
@@ -78,13 +56,14 @@ public class RoutingTabelle {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
         RoutingTabelle that = (RoutingTabelle) o;
-        return destination == that.destination && NextHop == that.NextHop && metric == that.metric && sequenceNumber == that.sequenceNumber && isValid == that.isValid && Arrays.equals(precursors, that.precursors);
+        return NextHop == that.NextHop && sequenceNumber == that.sequenceNumber && isValid == that.isValid && Arrays.equals(precursors, that.precursors);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(destination, NextHop, metric, sequenceNumber, isValid);
+        int result = Objects.hash(super.hashCode(), NextHop, sequenceNumber, isValid);
         result = 31 * result + Arrays.hashCode(precursors);
         return result;
     }
@@ -92,10 +71,8 @@ public class RoutingTabelle {
     @Override
     public String toString() {
         return "RoutingTabelle{" +
-                "destination=" + destination +
-                ", NextHop=" + NextHop +
+                "NextHop=" + NextHop +
                 ", precursors=" + Arrays.toString(precursors) +
-                ", metric=" + metric +
                 ", sequenceNumber=" + sequenceNumber +
                 ", isValid=" + isValid +
                 '}';
