@@ -2,6 +2,8 @@ package de.kai_morich.simple_bluetooth_terminal.aodv.Handle;
 
 import java.util.Base64;
 
+import de.kai_morich.simple_bluetooth_terminal.aodv.packages.RreqPacket;
+
 public class StreamDataHandle {
 
 
@@ -28,6 +30,26 @@ public class StreamDataHandle {
             return ((msg[0] - 1) / (int) Math.pow(2, 4));
         }
         return ((msg[0]) / (int) Math.pow(2, 4));
+    }
+
+    public RreqPacket showRREQ(byte[] rreq){
+
+        int type = 0;
+        int flags;
+        if(rreq[0]%2==1){
+            flags = 1;
+        }
+        else{
+            flags = 0;
+        }
+        int hopAddress = byte[1];
+
+
+
+        RreqPacket rreqPacket = new RreqPacket();
+        rreqPacket.setMessageType(0);
+
+        rreqPacket.se
     }
 
 }
