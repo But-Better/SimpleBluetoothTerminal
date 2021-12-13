@@ -15,7 +15,7 @@ import java.util.Arrays;
 import java.util.UUID;
 import java.util.concurrent.Executors;
 
-import de.kai_morich.simple_bluetooth_terminal.aodv.Handle.StreamDataHandle;
+import aodv.Handle.StreamData;
 
 class SerialSocket implements Runnable {
 
@@ -28,14 +28,14 @@ class SerialSocket implements Runnable {
     private final BluetoothDevice device;
     private BluetoothSocket socket;
     private boolean connected;
-    private final StreamDataHandle steamDataHandle;
+    private final StreamData streamData;
 
     SerialSocket(Context context, BluetoothDevice device) {
         if (context instanceof Activity)
             throw new InvalidParameterException("expected non UI context");
         this.context = context;
         this.device = device;
-        this.steamDataHandle = new StreamDataHandle();
+        this.streamData = new StreamData();
         disconnectBroadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
@@ -79,7 +79,7 @@ class SerialSocket implements Runnable {
     void write(byte[] data) throws IOException {
         if (!connected)
             throw new IOException("not connected");
-        this.steamDataHandle.readDataTraffic(data);
+        this.streamData.handle(data);
         socket.getOutputStream().write(data);
     }
 
