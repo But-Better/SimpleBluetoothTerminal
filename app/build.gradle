@@ -26,7 +26,7 @@ android {
 dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.3.0'
-    implementation files('/home/while/Dokumente/AODVlib/target/AODVlib-1.0-SNAPSHOT.jar')
+    implementation files('lib/AODVlib-1.0-SNAPSHOT.jar')
     androidTestImplementation 'org.junit.jupiter:junit-jupiter'
     androidTestImplementation 'org.junit.jupiter:junit-jupiter'
 }
